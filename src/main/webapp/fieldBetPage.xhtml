@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <f:view locale="#{localeBean.locale}">
+        <h:head>
+            <title>#{msgs.title} #{localeBean.language}</title>
+        </h:head>
+        <h:body>
+            <h:form>    
+                <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
+                    <h:graphicImage library="images" name="ca_flag.gif"/>
+                </h:commandLink>
+                
+                <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}">
+                    <h:graphicImage library="images" name="en_flag.gif"/>
+                </h:commandLink>
+                
+            <p><h:outputText value="#{msgs.header}"/></p>
+            <p><h:outputText value="#{msgs.field}"/></p>
+            
+            <p><h:outputText value="#{user.firstDice}"/></p>
+            <p><h:outputText value="#{user.secondDice}"/></p>
+                                 
+            <h:panelGrid columns="1">
+                #{msgs.bet}
+                <h:inputText value="#{user.bet}"/>
+                <h:commandButton type="submit" value="BET" action="#{fieldBet.processFieldBet()}"/>
+            </h:panelGrid>
+            
+            <p><h:outputText value="#{msgs.rulesField}"/></p>
+            <p><h:outputText value="#{msgs.toWin} #{user.bet}"/></p>
+            <p><h:outputText value="#{msgs.bank} #{user.pot}"/></p>
+            
+            <h:commandButton value="#{msgs.choose}" action="choicePage"/>
+            <h:commandButton value="#{msgs.quit}" action="byebyePage"/>
+            
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
