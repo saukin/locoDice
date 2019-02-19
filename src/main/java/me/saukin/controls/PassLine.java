@@ -51,12 +51,14 @@ public class PassLine {
         for (Integer win1 : WIN) {
             if (win1 == userBean.getResult()) {
                 userBean.setPot(userBean.getBet() + userBean.getPot());
+                userBean.setMessage("#{msgs.win}");
             }
         }
         
         for (Integer lose1 : LOSE) {
             if (lose1 == userBean.getResult()) {
-                userBean.setPot(userBean.getPot() - userBean.getBet())  ; 
+                userBean.setPot(userBean.getPot() - userBean.getBet())  ;
+                userBean.setMessage("#{msgs.lose}");
             }
         }  
         
@@ -74,9 +76,11 @@ public class PassLine {
     
         if (userBean.getResult() == 7) {
             userBean.setPot(userBean.getPot() - userBean.getBet());
+            userBean.setMessage("#{msgs.lose}");
             s = "passLinePage";
         } else if (userBean.getPoint() == userBean.getResult()) {
             userBean.setPot(userBean.getBet() + userBean.getPot());
+            userBean.setMessage("#{msgs.win}");
             s = "passLinePage";
         } else {
             s = "pointPage";

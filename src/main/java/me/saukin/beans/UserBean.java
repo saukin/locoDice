@@ -21,12 +21,12 @@ public class UserBean implements Serializable {
     private int secondDice;
     private int result;
     private int point;
-    private String game;
+    private String message;
 
     public UserBean() {
     }
 
-    public UserBean(String nickName, int pot, int bet, int firstDice, int secondDice, int result, int point, String game) {
+    public UserBean(String nickName, int pot, int bet, int firstDice, int secondDice, int result, int point, String message) {
         this.nickName = nickName;
         this.pot = pot;
         this.bet = bet;
@@ -34,7 +34,7 @@ public class UserBean implements Serializable {
         this.secondDice = secondDice;
         this.result = result;
         this.point = point;
-        this.game = game;
+        this.message = message;
     }
 
     public void setNickName(String nickName) {
@@ -65,8 +65,8 @@ public class UserBean implements Serializable {
         this.point = point;
     }
 
-    public void setGame(String game) {
-        this.game = game;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getNickName() {
@@ -97,8 +97,8 @@ public class UserBean implements Serializable {
         return point;
     }
 
-    public String getGame() {
-        return game;
+    public String getMessage() {
+        return message;
     }
 
     @Override
@@ -111,7 +111,7 @@ public class UserBean implements Serializable {
         hash = 67 * hash + this.secondDice;
         hash = 67 * hash + this.result;
         hash = 67 * hash + this.point;
-        hash = 67 * hash + Objects.hashCode(this.game);
+        hash = 67 * hash + Objects.hashCode(this.message);
         return hash;
     }
 
@@ -148,7 +148,7 @@ public class UserBean implements Serializable {
         if (!Objects.equals(this.nickName, other.nickName)) {
             return false;
         }
-        if (!Objects.equals(this.game, other.game)) {
+        if (!Objects.equals(this.message, other.message)) {
             return false;
         }
         return true;

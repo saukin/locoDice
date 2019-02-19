@@ -23,6 +23,7 @@
             <p><h:outputText value="#{user.secondDice}"/></p>
                                  
             <h:panelGrid columns="1">
+                <h:outputText value="#{userBean.message}"/>            
                 #{msgs.bet}
                 <h:inputText value="#{user.bet}"/>
                 <h:commandButton type="submit" value="BET" action="#{passLine.choosePassLine()}"/>
