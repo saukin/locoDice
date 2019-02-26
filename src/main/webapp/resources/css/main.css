@@ -11,3 +11,52 @@ html, body {
     box-sizing: border-box;
 }
 
+
+.locale {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 20px;
+   
+}
+
+.en {
+    margin-left: 5px;
+}
+
+
+ h1, h3{
+    width: 100%;
+    text-align: center;
+    margin:30px;
+}
+
+.logo {
+    width: 100%;
+    height: 20%;
+    text-align: center;
+}
+
+.playGround {
+    width: 70%;
+    height: 30%;
+    padding: 50px;
+}
+
+#dice {
+    padding: 50px;
+}
+
+.sideBar {
+    
+    padding: 50px;
+}
+
+.sideBar p {
+    padding: 10px;
+}
+
+.message {
+    color: red;
+}

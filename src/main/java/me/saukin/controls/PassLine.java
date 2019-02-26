@@ -12,22 +12,18 @@ public class PassLine {
     
     @Inject
     UserBean userBean;
-    
+    @Inject
+    Dice dice;
     
         private final Integer[] WIN = {7,11};
         private final Integer[] POINT = {4,5,6,8,9,10};
         private final Integer[] LOSE = {2,3,12};
         private final int POINT_LOSE = 7;
-        private int d1;
-        private int d2;
+        
     
     public String choosePassLine() throws Exception {
         
-        d1 = (int) (Math.random()*6) + 1;
-        userBean.setFirstDice(d1);
-        d2 = (int) (Math.random()*6) + 1;
-        userBean.setSecondDice(d2);
-        userBean.setResult(d2+d1);
+        dice.rollDice();
         
         String s = "";
         
@@ -42,8 +38,8 @@ public class PassLine {
             processPassLine();
             s = "passLinePage";
         }
-               
-        return s;
+        
+        return userBean.checkBank(s);
     }    
         
     public void processPassLine() throws Exception {    
@@ -51,14 +47,16 @@ public class PassLine {
         for (Integer win1 : WIN) {
             if (win1 == userBean.getResult()) {
                 userBean.setPot(userBean.getBet() + userBean.getPot());
-                userBean.setMessage("#{msgs.win}");
+                userBean.setWin(userBean.getBet());
+                userBean.setLost(0);
             }
         }
         
         for (Integer lose1 : LOSE) {
             if (lose1 == userBean.getResult()) {
                 userBean.setPot(userBean.getPot() - userBean.getBet())  ;
-                userBean.setMessage("#{msgs.lose}");
+                userBean.setWin(0);
+                userBean.setLost(userBean.getBet());
             }
         }  
         
@@ -76,11 +74,13 @@ public class PassLine {
     
         if (userBean.getResult() == 7) {
             userBean.setPot(userBean.getPot() - userBean.getBet());
-            userBean.setMessage("#{msgs.lose}");
+            userBean.setWin(0);
+            userBean.setLost(userBean.getBet());
             s = "passLinePage";
         } else if (userBean.getPoint() == userBean.getResult()) {
             userBean.setPot(userBean.getBet() + userBean.getPot());
-            userBean.setMessage("#{msgs.win}");
+            userBean.setWin(userBean.getBet());
+            userBean.setLost(0);
             s = "passLinePage";
         } else {
             s = "pointPage";
@@ -89,24 +89,6 @@ public class PassLine {
         return s;
     }  
     
-//    public String choosePassOrPoint() throws Exception {
-//        
-//        int d3 = (int) (Math.random()*6) + 1;
-//        userBean.setFirstDice(d3);
-//        int d4 = (int) (Math.random()*6) + 1;
-//        userBean.setFirstDice(d4);
-//        userBean.setResult(d3+d4);
-//        
-//        String s = "";
-//        
-//        if (userBean.getResult() != (d1+d2) || POINT_LOSE != (d1+d2)) {
-//            s = "pointPage";
-//        } else {
-//            processPassLine();
-//            s = "passLinePage";
-//        }
-//               
-//        return s;
-//    }    
+
     
 }

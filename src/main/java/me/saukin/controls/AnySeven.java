@@ -13,23 +13,25 @@ public class AnySeven {
     
     @Inject
     UserBean userBean;
+    @Inject
+    Dice dice;
     
+    final int WIN = 7;
+    String s = "anySevenPage";
     
+    public String processAnySeven() throws Exception {
     
-    public void processAnyBet() throws Exception {
-    
-        int win = 7;
+        dice.rollDice();
         
-        int d1 = (int) (Math.random()*6) + 1;
-        userBean.setFirstDice(d1);
-        int d2 = (int) (Math.random()*6) + 1;
-        userBean.setSecondDice(d2);
-        
-        if (win == d1+d2) {
+        if (WIN == userBean.getResult()) {
             userBean.setPot(userBean.getBet()*4 + userBean.getPot());
+            userBean.setWin(userBean.getBet()*4);
+            userBean.setLost(0);
         } else {
-            userBean.setPot(userBean.getPot() - userBean.getBet())  ;
+            userBean.setPot(userBean.getPot() - userBean.getBet());
+            userBean.setWin(0);
+            userBean.setLost(userBean.getBet());
         }
-        
+        return userBean.checkBank(s);
     }
 }

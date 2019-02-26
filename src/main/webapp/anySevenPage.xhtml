@@ -7,7 +7,7 @@
             <title>#{msgs.title} #{localeBean.language}</title>
         </h:head>
         <h:body>
-            <h:form>    
+            <h:form class="locale">
                 <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
                     <h:graphicImage library="images" name="ca_flag.gif"/>
                 </h:commandLink>
@@ -15,27 +15,41 @@
                 <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}">
                     <h:graphicImage library="images" name="en_flag.gif"/>
                 </h:commandLink>
-                
-            <p><h:outputText value="#{msgs.header}"/></p>
-            <p><h:outputText value="#{msgs.any}"/></p>
+            </h:form>
+            
+            
+            <h1><h:outputText class="header" value="#{msgs.header}"/></h1>
+            <h3><h:outputText value="#{msgs.any}"/></h3>
             
             <p><h:outputText value="#{user.firstDice}"/></p>
             <p><h:outputText value="#{user.secondDice}"/></p>
-                                 
-            <h:panelGrid columns="1">
-                #{msgs.bet}
-                <h:inputText value="#{user.bet}"/>
-                <h:commandButton type="submit" value="BET" action="#{anySeven.processAnyBet()}"/>
-            </h:panelGrid>
             
-            <p><h:outputText value="#{msgs.rulesAny}"/></p>
-            <p><h:outputText value="#{msgs.toWin} #{user.bet}"/></p>
-            <p><h:outputText value="#{msgs.bank} #{user.pot}"/></p>
-            
-            <h:commandButton value="#{msgs.choose}" action="choicePage"/>
-            <h:commandButton value="#{msgs.quit}" action="byebyePage"/>
-            
+            <h:form class="playGround">
+                <h:panelGrid columns="1">
+                    <p><h:message for="bet" /></p>
+
+                    #{msgs.bet}
+                    <h:inputText id="bet" value="#{user.bet}" required="true"
+                                 requiredMessage="#{msgs.enterBet}"
+                                 validatorMessage="#{msgs.betRange}"
+                                 converterMessage="#{msgs.betRange}">
+                        <f:validateLongRange id="range" minimum="1" maximum="#{user.pot}"/>
+
+                    </h:inputText>
+                    <h:commandButton type="submit" value="BET" action="#{anySeven.processAnySeven()}"/>
+                </h:panelGrid>
             </h:form>
+            
+            <h:form class="sideBar">  
+                <p><h:outputText value="#{msgs.rulesAny}"/></p>
+                <p><h:outputText value="#{msgs.youWon} #{user.win}"/></p>
+                <p><h:outputText value="#{msgs.youLost} #{user.lost}"/></p>
+                <p><h:outputText value="#{msgs.bank} #{user.pot}"/></p>
+
+                <h:commandButton value="#{msgs.choose}" action="choicePage"/>
+                <h:commandButton value="#{msgs.quit}" action="byebyePage"/>
+            </h:form>
+            
         </h:body>
     </f:view>
 </html>

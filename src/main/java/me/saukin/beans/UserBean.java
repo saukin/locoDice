@@ -2,8 +2,6 @@
 package me.saukin.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -21,12 +19,14 @@ public class UserBean implements Serializable {
     private int secondDice;
     private int result;
     private int point;
-    private String message;
+    private String message = "";
+    private int win;
+    private int lost;
 
     public UserBean() {
     }
 
-    public UserBean(String nickName, int pot, int bet, int firstDice, int secondDice, int result, int point, String message) {
+    public UserBean(String nickName, int pot, int bet, int firstDice, int secondDice, int result, int point, int win, int lost) {
         this.nickName = nickName;
         this.pot = pot;
         this.bet = bet;
@@ -34,7 +34,8 @@ public class UserBean implements Serializable {
         this.secondDice = secondDice;
         this.result = result;
         this.point = point;
-        this.message = message;
+        this.win = win;
+        this.lost = lost;
     }
 
     public void setNickName(String nickName) {
@@ -69,6 +70,14 @@ public class UserBean implements Serializable {
         this.message = message;
     }
 
+    public void setWin(int win) {
+        this.win = win;
+    }
+
+    public void setLost(int lost) {
+        this.lost = lost;
+    }
+
     public String getNickName() {
         return nickName;
     }
@@ -101,17 +110,27 @@ public class UserBean implements Serializable {
         return message;
     }
 
+    public int getWin() {
+        return win;
+    }
+
+    public int getLost() {
+        return lost;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.nickName);
-        hash = 67 * hash + this.pot;
-        hash = 67 * hash + this.bet;
-        hash = 67 * hash + this.firstDice;
-        hash = 67 * hash + this.secondDice;
-        hash = 67 * hash + this.result;
-        hash = 67 * hash + this.point;
-        hash = 67 * hash + Objects.hashCode(this.message);
+        int hash = 3;
+        hash = 13 * hash + Objects.hashCode(this.nickName);
+        hash = 13 * hash + this.pot;
+        hash = 13 * hash + this.bet;
+        hash = 13 * hash + this.firstDice;
+        hash = 13 * hash + this.secondDice;
+        hash = 13 * hash + this.result;
+        hash = 13 * hash + this.point;
+        hash = 13 * hash + Objects.hashCode(this.message);
+        hash = 13 * hash + this.win;
+        hash = 13 * hash + this.lost;
         return hash;
     }
 
@@ -145,6 +164,12 @@ public class UserBean implements Serializable {
         if (this.point != other.point) {
             return false;
         }
+        if (this.win != other.win) {
+            return false;
+        }
+        if (this.lost != other.lost) {
+            return false;
+        }
         if (!Objects.equals(this.nickName, other.nickName)) {
             return false;
         }
@@ -153,12 +178,13 @@ public class UserBean implements Serializable {
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
+
+    public String checkBank(String s) {
+        if (this.pot == 0) {
+            s = "byebyePage";
+        }
+        return s;
+    }
     
 }
 

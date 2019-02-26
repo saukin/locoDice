@@ -10,7 +10,7 @@
             <title>#{msgs.title} #{localeBean.language}</title>
         </h:head>
         <h:body>
-            <h:form>    
+            <h:form class="locale">
                 <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
                     <h:graphicImage library="images" name="ca_flag.gif"/>
                 </h:commandLink>
@@ -18,15 +18,17 @@
                 <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}">
                     <h:graphicImage library="images" name="en_flag.gif"/>
                 </h:commandLink>
-                
-            <p><h:outputText value="#{msgs.header}"/></p>
+            </h:form>
             
-            <p><h:outputText value="#{user.nickName} #{msgs.choice}"/></p>
-                                 
-            <h:commandButton value="#{msgs.field}" action="fieldBetPage"/>
-            <h:commandButton value="#{msgs.pass}" action="passLinePage"/>
-            <h:commandButton value="#{msgs.any}" action="anySevenPage"/>
-            
+            <h:form>
+                <h1><h:outputText class="header" value="#{msgs.header}"/></h1>
+
+                <p><h:outputText value="#{user.nickName} #{msgs.choice}"/></p>
+
+
+                <h:commandButton value="#{msgs.field}" action="fieldBetPage"/>
+                <h:commandButton value="#{msgs.pass}" action="passLinePage"/>
+                <h:commandButton value="#{msgs.any}" action="anySevenPage"/>
             </h:form>
         </h:body>
     </f:view>

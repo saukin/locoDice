@@ -7,36 +7,41 @@
             <title>#{msgs.title} #{localeBean.language}</title>
         </h:head>
         <h:body>
-            <h:form>    
-                <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
+            <h:form class="locale">
+                <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}" immediate="true">
                     <h:graphicImage library="images" name="ca_flag.gif"/>
                 </h:commandLink>
                 
-                <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}">
+                <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}" immediate="true">
                     <h:graphicImage library="images" name="en_flag.gif"/>
                 </h:commandLink>
-                
-            <p><h:outputText value="#{msgs.header}"/></p>
-            <p><h:outputText value="#{msgs.pass}"/></p>
+            </h:form>
+            
+            
+            <h1><h:outputText class="header" value="#{msgs.header}"/></h1>
+            <h3><h:outputText value="#{msgs.pass}"/></h3>
             
             <p><h:outputText value="#{user.firstDice}"/></p>
             <p><h:outputText value="#{user.secondDice}"/></p>
-                                 
-            <h:panelGrid columns="1">
-                #{msgs.point}
-                
-                <h:commandButton type="submit" value="Roll" action="#{passLine.processPoint()}"/>
-            </h:panelGrid>
             
-            <p><h:outputText value="#{msgs.rulesPass}"/></p>
-            <p><h:outputText value="#{msgs.toWin} #{user.bet}"/></p>
-            <p><h:outputText value="#{msgs.bank} #{user.pot}"/></p>
-            
-            <h:commandButton value="#{msgs.choose}" action="choicePage"/>
-            <h:commandButton value="#{msgs.quit}" action="byebyePage"/>
-            
+            <h:form class="playGround">                   
+                <h:panelGrid columns="1">
+                    #{msgs.point}
+
+                    <h:commandButton type="submit" value="Roll" action="#{passLine.processPoint()}"/>
+                </h:panelGrid>
             </h:form>
-        </h:body>
+            
+            <h:form class="sideBar"> 
+                <p><h:outputText value="#{msgs.rulesPass}"/></p>
+                <p><h:outputText value="#{msgs.toWin} #{user.bet}"/></p>
+                <p><h:outputText value="#{msgs.bank} #{user.pot}"/></p>
+
+                <h:commandButton value="#{msgs.choose}" action="choicePage" immediate="true"/>
+                <h:commandButton value="#{msgs.quit}" action="byebyePage" immediate="true"/>
+                </h:form>
+
+            </h:body>
     </f:view>
 </html>
 

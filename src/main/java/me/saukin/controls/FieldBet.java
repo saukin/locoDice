@@ -12,45 +12,58 @@ public class FieldBet {
     
     @Inject
     UserBean userBean;
+    @Inject
+    Dice dice;
 
 
-public void processFieldBet() throws Exception {
+    
+public String processFieldBet() throws Exception {
     
         Integer[] win = {3,4,9,10,11};
-        Integer[] winX2 = {2};
-        Integer[] winX3 = {12};
+        int winX2 = 2;
+        int winX3 = 12;
         Integer[] lose = {5,6,7,8};
+        String s = "fieldBetPage";
         
-        
-        int d1 = (int) (Math.random()*6) + 1;
-        userBean.setFirstDice(d1);
-        int d2 = (int) (Math.random()*6) + 1;
-        userBean.setSecondDice(d2);
+        dice.rollDice();
         
         for (Integer win1 : win) {
-            if (win1 == d1+d2) {
+            if (win1 == userBean.getResult()) {
                 userBean.setPot(userBean.getBet() + userBean.getPot());
+                userBean.setWin(userBean.getBet());
+                userBean.setLost(0);
+                
             }
+            
         } 
         
-        for (Integer winX21 : winX2) {
-            if (winX21 == d1+d2) {    
+        if (winX2 == userBean.getResult()) {    
                 userBean.setPot(userBean.getBet()*2 + userBean.getPot());
-            }
+                userBean.setWin(userBean.getBet()*2);
+                userBean.setLost(0);
+                
         }
         
         
-        for (Integer winX31 : winX3) {
-            if (winX31 == d1+d2) {
+        if (winX3 == userBean.getResult()) {
                 userBean.setPot(userBean.getBet()*3 + userBean.getPot());
-            } 
+                userBean.setWin(userBean.getBet()*3);
+                userBean.setLost(0);
+                
         }
         
         for (Integer lose1 : lose) {
-            if (lose1 == d1+d2) {
-                userBean.setPot(userBean.getPot() - userBean.getBet())  ;     
+            if (lose1 == userBean.getResult()) {
+                userBean.setPot(userBean.getPot() - userBean.getBet());
+                userBean.setLost(userBean.getBet());
+                userBean.setWin(0);
+               
             }
         }
         
-    }
+        return userBean.checkBank(s);
+
+   }
+        
+
 }

@@ -10,7 +10,7 @@
             <title>#{msgs.title} #{localeBean.language}</title>
         </h:head>
         <h:body>
-            <h:form>
+            <h:form class="locale">
                 <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
                     <h:graphicImage library="images" name="ca_flag.gif"/>
                 </h:commandLink>
@@ -18,14 +18,22 @@
                 <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}">
                     <h:graphicImage library="images" name="en_flag.gif"/>
                 </h:commandLink>
-                
-                <p><h:outputText value="#{msgs.header}"/></p>
+            </h:form>
+            
+            <h:form>
+                <h1><h:outputText class="header" value="#{msgs.header}"/></h1>
                
                 <h:panelGrid columns="1">
                     #{msgs.nick}
-                    <h:inputText value="#{user.nickName}"/>
+                    <h:inputText value="#{user.nickName}" required="true"
+                                 requiredMessage="#{msgs.enterYourName}"/>    
                     #{msgs.pot}
-                    <h:inputText value="#{user.pot}"/>
+                    <h:inputText value="#{user.pot}" required="true"
+                                 requiredMessage="#{msgs.enterBank}"
+                                 validatorMessage="#{msgs.bankRange}"
+                                 converterMessage="#{msgs.bankRange}">
+                        <f:validateLongRange minimum="10" maximum="10000"/>
+                    </h:inputText>
                 </h:panelGrid>
                 
                 <h:commandButton value="#{msgs.choose}" action="choicePage"/>
