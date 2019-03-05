@@ -1,9 +1,16 @@
 
 package me.saukin.beans;
 
+
+
 import java.io.Serializable;
 import java.util.Objects;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Named;
 
 @Named("user")
@@ -19,14 +26,14 @@ public class UserBean implements Serializable {
     private int secondDice;
     private int result;
     private int point;
-    private String message = "";
+    private String mess = "";
     private int win;
     private int lost;
 
     public UserBean() {
     }
 
-    public UserBean(String nickName, int pot, int bet, int firstDice, int secondDice, int result, int point, int win, int lost) {
+    public UserBean(String nickName, int pot, int bet, int firstDice, int secondDice, int result, int point, String mess, int win, int lost) {
         this.nickName = nickName;
         this.pot = pot;
         this.bet = bet;
@@ -34,6 +41,7 @@ public class UserBean implements Serializable {
         this.secondDice = secondDice;
         this.result = result;
         this.point = point;
+        this.mess = mess;
         this.win = win;
         this.lost = lost;
     }
@@ -66,8 +74,8 @@ public class UserBean implements Serializable {
         this.point = point;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMess(String message) {
+        this.mess = message;
     }
 
     public void setWin(int win) {
@@ -106,8 +114,8 @@ public class UserBean implements Serializable {
         return point;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMess() {
+        return mess;
     }
 
     public int getWin() {
@@ -128,7 +136,7 @@ public class UserBean implements Serializable {
         hash = 13 * hash + this.secondDice;
         hash = 13 * hash + this.result;
         hash = 13 * hash + this.point;
-        hash = 13 * hash + Objects.hashCode(this.message);
+        hash = 13 * hash + Objects.hashCode(this.mess);
         hash = 13 * hash + this.win;
         hash = 13 * hash + this.lost;
         return hash;
@@ -173,11 +181,14 @@ public class UserBean implements Serializable {
         if (!Objects.equals(this.nickName, other.nickName)) {
             return false;
         }
-        if (!Objects.equals(this.message, other.message)) {
+        if (!Objects.equals(this.mess, other.mess)) {
             return false;
         }
         return true;
     }
+    
+
+    
 
     public String checkBank(String s) {
         if (this.pot == 0) {
