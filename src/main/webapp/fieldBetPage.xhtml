@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <f:view locale="#{localeBean.locale}">
+        <h:head>
+            <title>#{msgs.title} #{localeBean.language}</title>
+            <h:outputStylesheet library="css" name="main.css"/>
+        </h:head>
+        <h:body>
+            <div class="all">
+                <section  class="left">
+                    <section class="locale">    
+                        <h:form class="locale">
+                            <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}" immediate="true">
+                                <h:graphicImage library="images" name="ca_flag.gif"/>
+                                
+                            </h:commandLink>
+
+                            <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}" immediate="true">
+                                <h:graphicImage class="en" library="images" name="en_flag.gif"/>
+                                
+                            </h:commandLink>
+                        </h:form>
+                    </section>
+                    <header>  
+                        <h1><h:outputText value="#{msgs.header}"/></h1>
+                        
+                    </header>  
+            
+                    <section class="gameField">    
+                        <h3><h:outputText value="#{msgs.field}"/></h3>
+                                
+                        <div class="l-container">
+                             <div class="c-cube">
+                                <div class="c-cube__side c-cube__side--front"><p>#{user.firstDice}</p></div>
+                                <div class="c-cube__side c-cube__side--back"><p>#{dice.d1Rear}</p></div>
+                                <div class="c-cube__side c-cube__side--right"><p>#{dice.d1Right}</p></div>
+                                <div class="c-cube__side c-cube__side--left"><p>#{dice.d1Left}</p></div>
+                                <div class="c-cube__side c-cube__side--top"><p>#{dice.d1Top}</p></div>
+                                <div class="c-cube__side c-cube__side--bottom"><p>#{dice.d1Bottom}</p></div>
+                            </div>
+                        </div>
+
+                        <div class="l-container l-container--sparta">
+                            <div class="c-cube c-cube--spin-right">
+                                <div class="c-cube__side c-cube__side--front"><p>#{user.secondDice}</p></div>
+                                <div class="c-cube__side c-cube__side--back"><p>#{dice.d2Rear}</p></div>
+                                <div class="c-cube__side c-cube__side--right"><p>#{dice.d2Right}</p></div>
+                                <div class="c-cube__side c-cube__side--left"><p>#{dice.d2Left}</p></div>
+                                <div class="c-cube__side c-cube__side--top"><p>#{dice.d2Top}</p></div>
+                                <div class="c-cube__side c-cube__side--bottom"><p>#{dice.d2Bottom}</p></div>
+                            </div>
+                        </div>
+                    </section>
+                        
+                       
+
+                    <h:form class="bet">
+                        <h1><h:message class="message" for="bet" /></h1>
+                        <h1 id="result"><h:outputText id="result" value="#{user.mess}"/></h1>
+
+                                
+                        <h:inputText id="bet" value="#{user.bet}" required="true"
+                            requiredMessage="#{msgs.enterBet}"
+                            validatorMessage="#{msgs.betRange}"
+                            converterMessage="#{msgs.betRange}">
+                        <f:validateLongRange id="range" minimum="1" maximum="#{user.pot}"/>
+                        <f:convertNumber for="bet" integerOnly="true"/>
+                        </h:inputText>
+                        <h:commandButton type="submit" value="BET" action="#{fieldBet.processFieldBet()}" styleClass="betButton"/>
+                            
+                    </h:form>
+                    
+                </section>
+            
+                <section class="right">
+                    <h:form>    
+                        <p id="rules"><h:outputText value="#{msgs.rulesField}"/></p>
+                        <p id="youWon"><h:outputText value="#{msgs.youWon} #{user.win}"/></p>
+                        <p id="youLost"><h:outputText value="#{msgs.youLost} #{user.lost}"/></p>
+                        <p id="bank"><h:outputText value="#{msgs.bank} #{user.pot}"/></p>
+                        
+                        <div class="button">
+                            <h:commandButton value="#{msgs.choose}" action="#{user.resetCh()}" immediate="true" styleClass="choose"/>
+                            <h:commandButton value="#{msgs.quit}" action="#{user.resetEnd()}" immediate="true" styleClass="finish"/>
+                        </div>    
+                    </h:form>
+                </section>
+            </div>
+        </h:body>
+    </f:view>
+</html>

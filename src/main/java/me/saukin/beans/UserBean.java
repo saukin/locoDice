@@ -12,6 +12,9 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Named;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Named("user")
 @SessionScoped
@@ -22,13 +25,41 @@ public class UserBean implements Serializable {
     private String nickName;
     private int pot;
     private int bet;
-    private int firstDice;
-    private int secondDice;
+    private int firstDice = 1;
+    private int secondDice = 6;
     private int result;
     private int point;
     private String mess = "";
     private int win;
     private int lost;
+    
+    protected String BUNDLE = "me.saukin.bundles.messages";
+    protected String BUNDLE_WIN = "congrats";
+    protected String BUNDLE_LOSE = "sorry";
+    protected String bundleId ="";
+
+    public String getBUNDLE() {
+        return BUNDLE;
+    }
+
+    public String getBUNDLE_WIN() {
+        return BUNDLE_WIN;
+    }
+
+    public String getBUNDLE_LOSE() {
+        return BUNDLE_LOSE;
+    }
+
+    public void setBundleId(String bundleId) {
+        this.bundleId = bundleId;
+    }
+
+    public String getBundleId() {
+        return bundleId;
+    }
+    
+    
+
 
     public UserBean() {
     }
@@ -188,7 +219,17 @@ public class UserBean implements Serializable {
     }
     
 
+    public String resetCh() {
+       mess = "";
+       bundleId = "";
+       return "choicePage";
+    }
     
+    public String resetEnd() {
+       mess = "";
+       bundleId = "";
+       return "byebyePage";
+    }
 
     public String checkBank(String s) {
         if (this.pot == 0) {

@@ -1,4 +1,8 @@
 
+@import url('https://fonts.googleapis.com/css?family=Russo+One');
+@import url('https://fonts.googleapis.com/css?family=Archivo+Black|Russo+One');
+
+
 html, body {
 	height: 100%;
 }
@@ -15,6 +19,7 @@ html, body {
     width: 100%;
     align-items: center;
     justify-content: center;
+    background-color: gray;
 }
 
 .left {
@@ -23,27 +28,37 @@ html, body {
     display: flex;
     flex-flow: column;
     align-items: center;
-    justify-content: center;
-    border: solid 2px black;
+    justify-content: flex-start;
+    /*border: solid 2px black;*/
 }
 
-.right {
-    width: 20%;
-    height: 100%;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-    border: solid 2px black;
+.welcome {
+    text-align: center;
 }
 
-header {
+header h1 {
     width: 100%;
-    height: 30%;
+    height: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: solid 2px black;
+    /*border: solid 2px black;*/
+    font-family: 'Russo One', sans-serif;
+    font-size: 15vmin;
+}
+
+#choice {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 3vmin;
+}
+
+.choice {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 3vmin;
 }
 
 .gameField {
@@ -53,7 +68,14 @@ header {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    border: solid 2px black;
+    /*border: solid 2px black;*/
+}
+
+.gamefield h3 {
+    width: 100%;
+    text-align: center;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 10vmin;
 }
 
 .dice {
@@ -69,7 +91,214 @@ header {
     width: 100%;
     height: 20%;
     display: flex;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
-    border: solid 2px black;
+    /*border: solid 2px black;*/
+    margin-bottom: 10%;
+}
+
+.bet h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2vmin;
+    color: brown;
+}
+
+#result {
+	font-size: 4vh;
+	position: relative;
+	animation: aniName 1s;
+}
+
+/*borders of animation*/
+@keyFrames aniName {
+	0%{opacity:0}
+        94%{opacity:0}
+	95%{opacity:1}
+	96%{opacity:0}
+        97%{opacity:1}
+        98%{opacity:0}
+        99%{opacity:1}
+	100%{opacity:1}
+}
+
+
+.right {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    border-left: solid 2px black;
+    text-align: center;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+
+#rules {
+    width: 100%;
+    height: 50%;
+    
+    /*border: solid 2px black;*/
+}
+
+#youWon {
+    width: 100%;
+    height: 10%;
+    
+    /*border: solid 2px black;*/
+}
+
+#youLost {
+    width: 100%;
+    height: 10%;
+    
+    /*border: solid 2px black;*/
+}
+
+#bank {
+    width: 100%;
+    height: 10%;
+    
+/*    border: solid 2px black;*/
+}
+
+.locale {
+    width: 100%;
+    top: 10px;
+    margin: 10px;
+    
+}
+
+.button {
+    width: 100%;
+    height: 10%;
+    
+}
+
+.button .choose{
+    width: 100%;
+    height: 50%;
+    
+}
+
+.button .finish{
+    width: 100%;
+    height: 50%;
+    
+}
+
+.betButton {
+    width: 160px;
+    height: 50px;
+}
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+.l-container {
+  height: 50%;
+  left: 0;
+  position: relative;
+  top: 0;
+  width: 50%;
+  /*background-color: gray;*/
+}
+
+.l-container--sparta {
+  left: auto;
+  right: 0;
+}
+
+.c-cube {
+  animation: spin-cube-left 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+  font-size: 10vmax;
+  left: 50%;
+  margin-left: -0.5em;
+  margin-top: -0.5em;
+  position: absolute;
+  top: 50%;
+  transform: rotateX(-15deg) rotateY(15deg);
+  transform-origin: 0.5em 0.5em;
+  transform-style: preserve-3d;
+}
+
+.c-cube--spin-right {
+  animation-name: spin-cube-right;
+  transform: rotateX(8deg) rotateY(-12deg);
+}
+
+.c-cube__side {
+  height: 1em;
+  position: absolute;
+  width: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.c-cube__side--front,
+.c-cube__side--back {
+  background: #FFF1E6;
+}
+
+.c-cube__side--right,
+.c-cube__side--left {
+  background: #BFB5AB;
+}
+
+.c-cube__side--top,
+.c-cube__side--bottom {
+  background: #8E867F;
+}
+
+.c-cube__side--front {
+  transform: translateZ(0.5em);
+  
+}
+
+.c-cube__side--back {
+  transform: rotateX(-180deg) translateZ(0.5em);
+	
+}
+
+.c-cube__side--right {
+  transform: rotateY(90deg) translateZ(0.5em);
+	
+}
+
+.c-cube__side--left {
+  transform: rotateY(-90deg) translateZ(0.5em);
+	
+}
+
+.c-cube__side--top {
+  transform: rotateX(90deg) translateZ(0.5em);
+	
+}
+
+.c-cube__side--bottom {
+  transform: rotateX(-90deg) translateZ(0.5em);
+	
+}
+
+@keyframes spin-cube-left {
+  0% {
+    transform: rotateX(-15deg) rotateY(15deg);
+  }
+  100% {
+    transform: rotateX(-1815deg) rotateY(-1785deg);
+  }
+}
+@keyframes spin-cube-right {
+  0% {
+    transform: rotateX(8deg) rotateY(-12deg);
+  }
+  100% {
+    transform: rotateX(1808deg) rotateY(1788deg);
+  }
 }
