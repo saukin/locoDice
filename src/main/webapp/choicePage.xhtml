@@ -31,9 +31,9 @@
                 <h1 id="choice"><h:outputText value="#{user.nickName} #{msgs.choice}"/></h1>
 
             <h:form>
-                <h:commandButton value="#{msgs.field}" action="#{fieldBet.processFieldBet()}" styleClass="betButton"/>
-                <h:commandButton value="#{msgs.pass}" action="#{passLine.choosePassLine()}" styleClass="betButton"/>
-                <h:commandButton value="#{msgs.any}" action="#{anySeven.processAnySeven()}" styleClass="betButton"/>
+                <h:commandButton value="#{msgs.field}" action="fieldBetPage" styleClass="betButton"/>
+                <h:commandButton value="#{msgs.pass}" action="passLinePage" styleClass="betButton"/>
+                <h:commandButton value="#{msgs.any}" action="anySevenPage" styleClass="betButton"/>
             </h:form>
                 </section>
             </div>

@@ -11,7 +11,7 @@
             <div class="all">
                 <section  class="left">
                     <section class="locale">    
-                        <h:form class="locale">
+                        <h:form>
                             <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}" immediate="true">
                                 <h:graphicImage library="images" name="ca_flag.gif"/>
                                 
@@ -28,7 +28,7 @@
                         
                     </header>  
             
-                    <section class="gameField">    
+                    <h:form id="gameField" class="gameField" > 
                         <h3><h:outputText value="#{msgs.pass}"/></h3>
                                 
                         <div class="l-container">
@@ -52,9 +52,9 @@
                                 <div class="c-cube__side c-cube__side--bottom"><p>#{dice.d2Bottom}</p></div>
                             </div>
                         </div>
-                    </section>
+                    </h:form>
             
-                        <h:form class="bet">                  
+                        <h:form id="bet">                 
                             <h1 id="result">#{msgs.point}</h1>
                             
                             <h:commandButton type="submit" value="Roll" action="#{passLine.processPoint()}" styleClass="betButton"/>
@@ -62,8 +62,7 @@
                     
                 </section>    
             
-                <section class="right">
-                    <h:form>    
+                <h:form id="right">    
                         <p id="rules"><h:outputText value="#{msgs.rulesPass}"/></p>
                         <p id="youWon"><h:outputText value="#{msgs.youWon} #{user.win}"/></p>
                         <p id="youLost"><h:outputText value="#{msgs.youLost} #{user.lost}"/></p>
@@ -73,8 +72,7 @@
                             <h:commandButton value="#{msgs.choose}" action="#{user.resetCh()}" immediate="true" styleClass="choose"/>
                             <h:commandButton value="#{msgs.quit}" action="#{user.resetEnd()}" immediate="true" styleClass="finish"/>
                         </div>    
-                    </h:form>
-                </section>
+                </h:form>
             </div>
         </h:body>
     </f:view>

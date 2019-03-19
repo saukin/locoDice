@@ -8,22 +8,46 @@
     <f:view locale="#{localeBean.locale}">
         <h:head>
             <title>#{msgs.title} #{localeBean.language}</title>
+        <h:outputStylesheet library="css" name="main.css"/>
         </h:head>
         <h:body>
-            <h:form>
-                <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
-                    <h:graphicImage library="images" name="ca_flag.gif"/>
-                </h:commandLink>
-                
-                <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}">
-                    <h:graphicImage library="images" name="en_flag.gif"/>
-                </h:commandLink>
-                
-                <p><h:outputText value="#{msgs.bye} #{user.nickName}"/></p>
+            <div class="all">
+                <section  class="left">
+                    <section class="locale">    
+                        <h:form>
+                            <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
+                                <h:graphicImage library="images" name="ca_flag.gif"/>
+                                <f:ajax render="input"/>
+                            </h:commandLink>
+
+                            <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}">
+                                <h:graphicImage class="en" library="images" name="en_flag.gif"/>
+                                <f:ajax render="input"/>
+                            </h:commandLink>
+                        </h:form>
+                    </section>
+                    <header>  
+                        <h1><h:outputText value="#{msgs.header}"/></h1>
+                        
+                    </header> 
                
-               
-            </h:form>
+                    <h:form id="input">
+                        
+                        <h1><h:outputText value="#{msgs.bye} #{user.nickName} ..."/></h1>
+                        <br/><br/><br/>
+                         <h1><h:outputText value="#{msgs.lastChance}"/></h1>
+                        
+                        <h:inputText id="pot" value="#{user.pot}" required="true"
+                                     requiredMessage="#{msgs.enterBank}"
+                                     validatorMessage="#{msgs.bankRange}"
+                                     converterMessage="#{msgs.bankRange}">
+                            <f:validateLongRange minimum="10" maximum="10000"/>
+                        </h:inputText>
+                         <br/><br/>
+                        <h:commandButton value="#{msgs.choose}" action="choicePage" styleClass="betButton"/>
+                    </h:form>
+                </section>    
+            </div>        
         </h:body>
     </f:view>
 </html>
-

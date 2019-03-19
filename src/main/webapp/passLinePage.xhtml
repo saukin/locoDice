@@ -11,15 +11,15 @@
             <div class="all">
                 <section  class="left">
                     <section class="locale">    
-                        <h:form class="locale">
+                        <h:form>
                             <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}" immediate="true">
                                 <h:graphicImage library="images" name="ca_flag.gif"/>
-                                
+                                <f:ajax render="bet right"/>
                             </h:commandLink>
 
                             <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}" immediate="true">
                                 <h:graphicImage class="en" library="images" name="en_flag.gif"/>
-                                
+                                <f:ajax render="bet right"/>
                             </h:commandLink>
                         </h:form>
                     </section>
@@ -28,7 +28,7 @@
                         
                     </header>  
             
-                    <section class="gameField">    
+                    <h:form id="gameField" class="gameField" >    
                         <h3><h:outputText value="#{msgs.pass}"/></h3>
                                 
                         <div class="l-container">
@@ -52,30 +52,30 @@
                                 <div class="c-cube__side c-cube__side--bottom"><p>#{dice.d2Bottom}</p></div>
                             </div>
                         </div>
-                    </section>
+                    </h:form>
                         
                        
 
-                    <h:form class="bet">
-                        <h1><h:message class="message" for="bet" /></h1>
-                        <h1 id="result"><h:outputText id="result" value="#{user.mess}"/></h1>
-
-                                
-                        <h:inputText id="bet" value="#{user.bet}" required="true"
+                    <h:form id="bet">
+                        <h1><h:message id="message" for="input" style="color: crimson" /></h1>
+                        <h1 id="result"><h:outputText value="#{user.mess}" style="color: orange" /></h1>
+      
+                        <h:inputText id="input" value="#{user.bet}" required="true"
                             requiredMessage="#{msgs.enterBet}"
                             validatorMessage="#{msgs.betRange}"
                             converterMessage="#{msgs.betRange}">
-                        <f:validateLongRange id="range" minimum="1" maximum="#{user.pot}"/>
-                        <f:convertNumber for="bet" integerOnly="true"/>
+                            <f:validateLongRange minimum="1" maximum="#{user.pot}"/>
+                            <f:ajax event="keyup" render="message"/>
+                           
                         </h:inputText>
-                        <h:commandButton type="submit" value="BET" action="#{passLine.choosePassLine()}" styleClass="betButton"/>
+                        <br/>
+                        <h:commandButton id="submit" type="submit" value="BET" action="#{passLine.choosePassLine()}" styleClass="betButton"/>
                             
                     </h:form>
                     
                 </section>
             
-                <section class="right">
-                    <h:form>    
+                <h:form id="right">    
                         <p id="rules"><h:outputText value="#{msgs.rulesPass}"/></p>
                         <p id="youWon"><h:outputText value="#{msgs.youWon} #{user.win}"/></p>
                         <p id="youLost"><h:outputText value="#{msgs.youLost} #{user.lost}"/></p>
@@ -85,8 +85,8 @@
                             <h:commandButton value="#{msgs.choose}" action="#{user.resetCh()}" immediate="true" styleClass="choose"/>
                             <h:commandButton value="#{msgs.quit}" action="#{user.resetEnd()}" immediate="true" styleClass="finish"/>
                         </div>    
-                    </h:form>
-                </section>
+                </h:form>
+                
             </div>
         </h:body>
     </f:view>

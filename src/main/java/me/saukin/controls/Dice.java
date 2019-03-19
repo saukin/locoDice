@@ -1,7 +1,9 @@
 
 package me.saukin.controls;
 
+import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import me.saukin.beans.UserBean;
@@ -9,7 +11,7 @@ import me.saukin.beans.UserBean;
 @Named("dice")
 @RequestScoped
 
-public class Dice {
+public class Dice implements Serializable {
     
     @Inject
     UserBean userBean;
