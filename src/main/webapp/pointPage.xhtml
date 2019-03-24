@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
@@ -14,23 +17,23 @@
                         <h:form>
                             <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}" immediate="true">
                                 <h:graphicImage library="images" name="ca_flag.gif"/>
-                                
+                                <f:ajax render="bet right"/>
                             </h:commandLink>
 
                             <h:commandLink action="#{localeBean.setLanguage('en', 'CA')}" immediate="true">
                                 <h:graphicImage class="en" library="images" name="en_flag.gif"/>
-                                
+                                <f:ajax render="bet right"/>
                             </h:commandLink>
                         </h:form>
                     </section>
+                    
                     <header>  
                         <h1><h:outputText value="#{msgs.header}"/></h1>
-                        
                     </header>  
             
-                    <h:form id="gameField" class="gameField" > 
-                        <h3><h:outputText value="#{msgs.pass}"/></h3>
-                                
+                    <h3><h:outputText value="#{msgs.pass}"/></h3>
+            
+                    <h:form id="gameField" class="gameField" >    
                         <div class="l-container">
                              <div class="c-cube">
                                 <div class="c-cube__side c-cube__side--front"><p>#{user.firstDice}</p></div>
@@ -54,24 +57,18 @@
                         </div>
                     </h:form>
             
-                        <h:form id="bet">                 
-                            <h1 id="result">#{msgs.point}</h1>
-                            
-                            <h:commandButton type="submit" value="Roll" action="#{passLine.processPoint()}" styleClass="betButton"/>
-                        </h:form>
-                    
+                    <h:form id="bet">                 
+                        <h1 id="result">#{msgs.point} #{user.point}</h1>
+                        <h:commandButton type="submit" value="Roll" action="#{passLine.processPoint()}" styleClass="betButton"/>
+                    </h:form>
                 </section>    
             
                 <h:form id="right">    
-                        <p id="rules"><h:outputText value="#{msgs.rulesPass}"/></p>
-                        <p id="youWon"><h:outputText value="#{msgs.youWon} #{user.win}"/></p>
-                        <p id="youLost"><h:outputText value="#{msgs.youLost} #{user.lost}"/></p>
-                        <p id="bank"><h:outputText value="#{msgs.bank} #{user.pot}"/></p>
-                        
-                        <div class="button">
-                            <h:commandButton value="#{msgs.choose}" action="#{user.resetCh()}" immediate="true" styleClass="choose"/>
-                            <h:commandButton value="#{msgs.quit}" action="#{user.resetEnd()}" immediate="true" styleClass="finish"/>
-                        </div>    
+                    <p><h:outputText value="#{msgs.rules}"/></p><br/><br/>
+                    <p id="rules"><h:outputText value="#{msgs.rulesPass}"/></p>
+                    <p id="youWon"><h:outputText value="#{msgs.youWon} #{user.win}"/></p>
+                    <p id="youLost"><h:outputText value="#{msgs.youLost} #{user.lost}"/></p>
+                    <p id="bank"><h:outputText value="#{msgs.bank} #{user.pot}"/></p>
                 </h:form>
             </div>
         </h:body>

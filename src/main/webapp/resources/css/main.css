@@ -36,15 +36,21 @@ html, body {
     text-align: center;
 }
 
-header h1 {
+header  {
     width: 100%;
     height: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
     /*border: solid 2px black;*/
-    font-family: 'Russo One', sans-serif;
+}
+
+header h1 {
+    width: 100%;
+    height: 100%;
     font-size: 15vmin;
+    font-family: 'Russo One', sans-serif;
+    text-align: center;
 }
 
 #choice {
@@ -65,13 +71,13 @@ header h1 {
     width: 100%;
     height: 70%;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     /*border: solid 2px black;*/
 }
 
-.gamefield h3 {
+h3 {
     width: 100%;
     text-align: center;
     font-family: 'Archivo Black', sans-serif;
@@ -133,13 +139,15 @@ header h1 {
     border-left: solid 2px black;
     text-align: center;
     font-family: 'Archivo Black', sans-serif;
+    font-size: 2vmin;
 }
 
 
 #rules {
     width: 100%;
     height: 50%;
-    
+    font-size: 1.5vmin;
+    overflow: hidden;
     /*border: solid 2px black;*/
 }
 
@@ -167,7 +175,7 @@ header h1 {
 .locale {
     width: 100%;
     top: 10px;
-    margin: 10px;
+    padding: 10px;
     
 }
 
@@ -195,7 +203,8 @@ header h1 {
 }
 
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/*+++++++++++++++++++++++++++++ animation for dice ++++++++++++++++++
+++++++++++++++++++++++++++++taken from animista.net ++++++++++++++++++++++++++++++ */
 
 
 

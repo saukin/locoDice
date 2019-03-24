@@ -1,10 +1,17 @@
 package me.saukin.controls;
 
 import javax.enterprise.context.RequestScoped;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import me.saukin.beans.UserBean;
-import me.saukin.util.Messages;
+
+
+/**
+ * Class process Field Bet game 
+ * 
+ * @author saukin
+ */
 
 @Named("fieldBet")
 @RequestScoped
@@ -16,6 +23,13 @@ public class FieldBet {
     @Inject
     Dice dice;
     
+
+/**
+* method process Field Bet game 
+* 
+* @return String : address of the final page in  case if the bank is empty
+*         or address of the Field Bet game page
+*/
     
     
 public String processFieldBet() throws Exception {
@@ -25,45 +39,31 @@ public String processFieldBet() throws Exception {
         int winX2 = 2;
         int winX3 = 12;
         Integer[] lose = {5,6,7,8};
+         
         String s = "fieldBetPage";
+       
         
         dice.rollDice();
         
         for (Integer win1 : win) {
             if (win1 == userBean.getResult()) {
-                userBean.setPot(userBean.getBet() + userBean.getPot());
-                userBean.setWin(userBean.getBet());
-                userBean.setLost(0);
-                userBean.setBundleId(userBean.getBUNDLE_WIN());
-                userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+                dice.doWin();
             }
             
         } 
         
         if (winX2 == userBean.getResult()) {    
-                userBean.setPot(userBean.getBet()*2 + userBean.getPot());
-                userBean.setWin(userBean.getBet()*2);
-                userBean.setLost(0);
-                userBean.setBundleId(userBean.getBUNDLE_WIN());
-                userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+            dice.doWinX2();
         }
         
         
         if (winX3 == userBean.getResult()) {
-                userBean.setPot(userBean.getBet()*3 + userBean.getPot());
-                userBean.setWin(userBean.getBet()*3);
-                userBean.setLost(0);
-                userBean.setBundleId(userBean.getBUNDLE_WIN());
-                userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+            dice.doWinX3();    
         }
         
         for (Integer lose1 : lose) {
             if (lose1 == userBean.getResult()) {
-                userBean.setPot(userBean.getPot() - userBean.getBet());
-                userBean.setLost(userBean.getBet());
-                userBean.setWin(0);
-                userBean.setBundleId(userBean.getBUNDLE_LOSE());
-                userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+                dice.doLose();
             }
         }
         

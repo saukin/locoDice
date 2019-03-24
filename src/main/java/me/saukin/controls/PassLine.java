@@ -4,7 +4,13 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import me.saukin.beans.UserBean;
-import me.saukin.util.Messages;
+
+
+/**
+ * Class process Pass Line game 
+ * 
+ * @author saukin
+ */
 
 @Named("passLine")
 @RequestScoped
@@ -21,7 +27,14 @@ public class PassLine {
         private final Integer[] LOSE = {2,3,12};
         private final int POINT_LOSE = 7;
         
-    
+        
+/**
+ * method choose what to do after rolling the dice: do win/lose or point
+ * 
+ * @return String : address of the final page in  case if the bank is empty
+*         or address of the Pass Line game page or Point page
+ */
+        
     public String choosePassLine()  {
         
         dice.rollDice();
@@ -42,31 +55,39 @@ public class PassLine {
         
         return userBean.checkBank(s);
     }    
-        
+    
+
+/**
+ * 
+ * method checks the result and sets win/lose outcome
+ */
+    
     public void processPassLine() {    
         
         for (Integer win1 : WIN) {
             if (win1 == userBean.getResult()) {
-                userBean.setPot(userBean.getBet() + userBean.getPot());
-                userBean.setWin(userBean.getBet());
-                userBean.setLost(0);
-                userBean.setBundleId(userBean.getBUNDLE_WIN());
-                userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+                dice.doWin();
             }
         }
         
         for (Integer lose1 : LOSE) {
             if (lose1 == userBean.getResult()) {
-                userBean.setPot(userBean.getPot() - userBean.getBet())  ;
-                userBean.setWin(0);
-                userBean.setLost(userBean.getBet());
-                userBean.setBundleId(userBean.getBUNDLE_LOSE());
-                userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+                dice.doLose();
             }
         }  
         
     }
-        
+    
+
+/**
+ * 
+ * method process the point algorithm, 
+ *        checks the result and sets win/lose/point outcome
+ * 
+ * @return String: address of the final page in  case if the bank is empty
+*         or address of the Pass Line game page or Point page
+ */
+    
     public String processPoint() {
         
         dice.rollDice();
@@ -74,24 +95,16 @@ public class PassLine {
         String s;
     
         if (userBean.getResult() == POINT_LOSE) {
-            userBean.setPot(userBean.getPot() - userBean.getBet());
-            userBean.setWin(0);
-            userBean.setLost(userBean.getBet());
-            userBean.setBundleId(userBean.getBUNDLE_LOSE());
-            userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+            dice.doLose();
             s = "passLinePage";
         } else if (userBean.getPoint() == userBean.getResult()) {
-            userBean.setPot(userBean.getBet() + userBean.getPot());
-            userBean.setWin(userBean.getBet());
-            userBean.setLost(0);
-            userBean.setBundleId(userBean.getBUNDLE_WIN());
-            userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+            dice.doWin();
             s = "passLinePage";
         } else {
             s = "pointPage";
         }
         
-        return s;
+        return userBean.checkBank(s);
     }  
     
 

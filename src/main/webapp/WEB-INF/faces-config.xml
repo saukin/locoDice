@@ -14,5 +14,51 @@
             <base-name>me.saukin.bundles.messages</base-name>
             <var>msgs</var>
         </resource-bundle>
+        
     </application>
+    
+    <!--=================== I used redirect for F5-problem solution =====================-->
+    
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>choicePage</from-outcome>
+            <to-view-id>choicePage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>fieldBetPage</from-outcome>
+            <to-view-id>fieldBetPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>passLinePage</from-outcome>
+            <to-view-id>passLinePage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>pointPage</from-outcome>
+            <to-view-id>pointPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>anySevenPage</from-outcome>
+            <to-view-id>anySevenPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>byebyePage</from-outcome>
+            <to-view-id>byebyePage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        
+
+
+    </navigation-rule>
 </faces-config>

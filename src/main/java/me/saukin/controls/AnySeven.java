@@ -5,7 +5,13 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import me.saukin.beans.UserBean;
-import me.saukin.util.Messages;
+
+
+/**
+ * class process Any Seven game
+ * 
+ * @author saukin
+ */
 
 @Named("anySeven")
 @RequestScoped
@@ -20,22 +26,22 @@ public class AnySeven {
     final int WIN = 7;
     String s = "anySevenPage";
     
-    public String processAnySeven() throws Exception {
+    
+    /**
+     * method process Any Seven game 
+     * 
+     * @return String : address of the final page in  case if the bank is empty
+     *         or address of the Any Seven game page
+     */
+    
+    public String processAnySeven() {
     
         dice.rollDice();
         
         if (WIN == userBean.getResult()) {
-            userBean.setPot(userBean.getBet()*4 + userBean.getPot());
-            userBean.setWin(userBean.getBet()*4);
-            userBean.setLost(0);
-            userBean.setBundleId(userBean.getBUNDLE_WIN());
-            userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+            dice.doWinX4();
         } else {
-            userBean.setPot(userBean.getPot() - userBean.getBet());
-            userBean.setWin(0);
-            userBean.setLost(userBean.getBet());
-            userBean.setBundleId(userBean.getBUNDLE_LOSE());
-            userBean.setMess(Messages.getMessage(userBean.getBUNDLE(), userBean.getBundleId(), null).getDetail());
+            dice.doLose();
         }
         return userBean.checkBank(s);
     }

@@ -28,6 +28,7 @@ public class LocaleBean implements Serializable {
     
     private Locale locale;
 
+        
     @PostConstruct
     public void init() {
         locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
@@ -41,6 +42,15 @@ public class LocaleBean implements Serializable {
         return locale.getLanguage();
     }
 
+    
+    /**
+     * method set localization and checks if the lose/win message exists and 
+     * switch its language
+     * 
+     * @param a - language
+     * @param b - locale
+     */
+    
     public void setLanguage(String a, String b) {
         locale = new Locale(a, b);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);

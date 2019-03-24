@@ -1,17 +1,13 @@
 
 package me.saukin.beans;
 
-
-
 import java.io.Serializable;
 import java.util.Objects;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-
 @Named("user")
 @SessionScoped
-
 
 public class UserBean implements Serializable {
     
@@ -26,34 +22,16 @@ public class UserBean implements Serializable {
     private int win;
     private int lost;
     
+    /**
+     * 
+     * these variables are used for getting win or lose messages
+     */
     private final String BUNDLE = "me.saukin.bundles.messages";
-    private final String BUNDLE_WIN = "congrats";
-    private final String BUNDLE_LOSE = "sorry";
+    private final String BUNDLE_WIN = "win";
+    private final String BUNDLE_LOSE = "lose";
     private String bundleId ="";
 
-    public String getBUNDLE() {
-        return BUNDLE;
-    }
-
-    public String getBUNDLE_WIN() {
-        return BUNDLE_WIN;
-    }
-
-    public String getBUNDLE_LOSE() {
-        return BUNDLE_LOSE;
-    }
-
-    public void setBundleId(String bundleId) {
-        this.bundleId = bundleId;
-    }
-
-    public String getBundleId() {
-        return bundleId;
-    }
     
-    
-
-
     public UserBean() {
     }
 
@@ -99,7 +77,7 @@ public class UserBean implements Serializable {
     }
 
     public void setMess(String message) {
-        this.mess = message;
+        this.mess = "Total is " + result + " !" + message;
     }
 
     public void setWin(int win) {
@@ -113,7 +91,7 @@ public class UserBean implements Serializable {
     public String getNickName() {
         return nickName;
     }
-
+    
     public int getPot() {
         return pot;
     }
@@ -149,6 +127,29 @@ public class UserBean implements Serializable {
     public int getLost() {
         return lost;
     }
+    
+    
+    public String getBUNDLE() {
+        return BUNDLE;
+    }
+
+    public String getBUNDLE_WIN() {
+        return BUNDLE_WIN;
+    }
+
+    public String getBUNDLE_LOSE() {
+        return BUNDLE_LOSE;
+    }
+
+    public void setBundleId(String bundleId) {
+        this.bundleId = bundleId;
+    }
+
+    public String getBundleId() {
+        return bundleId;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -212,6 +213,14 @@ public class UserBean implements Serializable {
     }
     
 
+    /**
+     * 
+     * method resets mess, bundleId, bet, lost and win parameters for getting 
+     * "clean" page after changing a game
+     * 
+     * @return address of the page to select a game
+     */
+    
     public String resetCh() {
        mess = "";
        bundleId = "";
@@ -221,6 +230,15 @@ public class UserBean implements Serializable {
        return "choicePage";
     }
     
+    
+    /**
+     * 
+     * method resets mess, bundleId, bet, lost and win parameters for getting 
+     * "clean" page after quitting a game for a case when user return to casino
+     * 
+     * @return address of the final page 
+     */
+    
     public String resetEnd() {
        mess = "";
        bundleId = "";
@@ -229,6 +247,17 @@ public class UserBean implements Serializable {
        win = 0;
        return "byebyePage";
     }
+    
+    /**
+     * 
+     * method check if the bank is empty
+     * 
+     * @param s retrieve String parameter with current outcome after processing a game
+     * and turns it to "byebyePage" in case if the bank is empty
+     * 
+     * @return String : address of the final page in  case if the bank is empty
+     *         or address of the current page
+     */
 
     public String checkBank(String s) {
         if (this.pot == 0) {

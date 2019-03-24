@@ -26,16 +26,16 @@
                             </h:commandLink>
                         </h:form>
                     </section>
+                    
                     <header>  
                         <h1><h:outputText value="#{msgs.header}"/></h1>
-                        
                     </header> 
                
                     <h:form id="input">
                         
                         <h1><h:outputText value="#{msgs.bye} #{user.nickName} ..."/></h1>
                         <br/><br/><br/>
-                         <h1><h:outputText value="#{msgs.lastChance}"/></h1>
+                        <h1><h:outputText value="#{msgs.lastChance}"/></h1>
                         
                         <h:inputText id="pot" value="#{user.pot}" required="true"
                                      requiredMessage="#{msgs.enterBank}"

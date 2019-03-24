@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -24,15 +27,14 @@
                             </h:commandLink>
                         </h:form>
                     </section>
+                    
                     <header>  
                         <h1><h:outputText value="#{msgs.header}"/></h1>
-                        
                     </header>  
             
+                    <h3><h:outputText value="#{msgs.field}"/></h3>
                     
-                    <h:form id="gameField" class="gameField" >    
-                        <h3><h:outputText value="#{msgs.field}"/></h3>
-                                
+                    <h:form id="gameField" class="gameField" >             
                         <div class="l-container">
                              <div class="c-cube">
                                 <div class="c-cube__side c-cube__side--front"><p>#{user.firstDice}</p></div>
@@ -59,7 +61,7 @@
 
                     <h:form id="bet">
                         <h1><h:message id="message" for="input" style="color: crimson" /></h1>
-                        <h1 id="result"><h:outputText value="#{user.mess}" style="color: orange" /></h1>
+                        <h1 id="result"><h:outputText value=" #{user.mess}" style="color: orange" /></h1>
       
                         <h:inputText id="input" value="#{user.bet}" required="true"
                             requiredMessage="#{msgs.enterBet}"
@@ -71,13 +73,13 @@
                         </h:inputText>
                         <br/>
                         <h:commandButton id="submit" type="submit" value="BET" action="#{fieldBet.processFieldBet()}" styleClass="betButton"/>
-                        
                     </h:form>
                     
                 </section>
             
                 
                     <h:form id="right">    
+                        <p><h:outputText value="#{msgs.rules}"/></p><br/><br/>
                         <p id="rules"><h:outputText value="#{msgs.rulesField}"/></p>
                         <p id="youWon"><h:outputText value="#{msgs.youWon} #{user.win}"/></p>
                         <p id="youLost"><h:outputText value="#{msgs.youLost} #{user.lost}"/></p>
