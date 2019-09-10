@@ -1,7 +1,7 @@
 # locoDice
 study project - web application in java - java ee, jsf, payara
 
-This is my study project representing my basic abilities in java ee, jsf, payara server, maven and css. 
+This is my study project representing my basic skills in java ee, jsf, payara server, maven and css. 
 To launch it please do next actions:
 
 1. clone the project to your ide
